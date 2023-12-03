@@ -1,0 +1,31 @@
+name: Test Odoo Prueba
+
+on:
+  pull_request:
+    branches:
+      - "main"
+  push:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: ghcr.io/oca/oca-ci/py3.10-odoo16.0:latest
+
+    services:
+      postgres:
+        image: postgres:14.0
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: odoo
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install addons and dependencies
+        run: oca_install_addons
+      - name: Run tests
+        run: oca_run_tests
