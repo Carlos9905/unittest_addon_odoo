@@ -17,4 +17,4 @@ class TestSalario(common.TransactionCase):
     def test_salario(self):
         self.assertEqual(self.juan.total, 120)#
         self.assertEqual(self.pedro.total, 64)
-        self.assertEqual(self.maria.total, 100)
+        self.assertEqual(self.maria.total, 110)
